@@ -1,59 +1,37 @@
-import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
-import { getPayload } from 'payload'
-import React from 'react'
-import { fileURLToPath } from 'url'
+import Navigation from "@/components/navigation"
+import HeroSection from "@/components/hero-section"
+import ValueIconsSection from "@/components/value-icons-section"
+import ServicesSection from "@/components/services-section"
+import ProblemSolutionSection from "@/components/problem-solution-section"
+import NailHealthSection from "@/components/nail-health-section"
+import MeetRyanSection from "@/components/meet-ryan-section"
+import ArtSection from "@/components/art-section"
+import GallerySection from "@/components/gallery-section"
+import TestimonialsSection from "@/components/testimonials-section"
+import ExperienceSection from "@/components/experience-section"
+import NewClientSection from "@/components/new-client-section"
+import LocationSection from "@/components/location-section"
+import FinalCtaSection from "@/components/final-cta-section"
+import Footer from "@/components/footer"
+import FloatingBubbles from "@/components/floating-bubbles"
 
-import config from '@/payload.config'
-import './styles.css'
-
-export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
-
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
-
+export default function Home() {
   return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
-    </div>
+    <main className="relative overflow-x-hidden">
+      <FloatingBubbles />
+      <Navigation />
+      <HeroSection />
+      <ValueIconsSection />
+      <ServicesSection />
+      <ProblemSolutionSection />
+      <NailHealthSection />
+      <MeetRyanSection />
+      <GallerySection />
+      <ArtSection />
+      <TestimonialsSection />
+      <ExperienceSection />
+      <LocationSection />
+      <Footer />
+    </main>
   )
 }
